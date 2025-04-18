@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeRide - Passenger</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="passenger.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Country Selection Modal -->
+    <div class="modal fade" id="countryModal" tabindex="-1" aria-labelledby="countryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="countryModalLabel">Select Your Country</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action country-option" data-country="GH">
+                            <img src="flags/ghana.png" alt="Ghana Flag" width="20"> Ghana (GHS)
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action country-option" data-country="NG">
+                            <img src="flags/nigeria.png" alt="Nigeria Flag" width="20"> Nigeria (NGN)
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action country-option" data-country="TG">
+                            <img src="flags/togo.png" alt="Togo Flag" width="20"> Togo (XOF)
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action country-option" data-country="CI">
+                            <img src="flags/cotedivoire.png" alt="Côte d'Ivoire Flag" width="20"> Côte d'Ivoire (XOF)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="container-fluid p-0" style="height: 100vh;">
+        <!-- Map View -->
+        <div id="map" style="height: 70vh;"></div>
+        
+        <!-- Ride Booking Panel -->
+        <div class="card fixed-bottom rounded-top-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="flex-grow-1">
+                        <input type="text" class="form-control" id="pickupLocation" placeholder="Pickup location">
+                    </div>
+                    <button class="btn btn-light ms-2" id="currentLocationBtn">
+                        <i class="fas fa-location-arrow"></i>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="destinationLocation" placeholder="Where to?">
+                </div>
+                
+                <div class="d-flex justify-content-between mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bikeType" id="standardBike" checked>
+                        <label class="form-check-label" for="standardBike">Standard</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bikeType" id="premiumBike">
+                        <label class="form-check-label" for="premiumBike">Premium</label>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary w-100 py-3" id="findRideBtn">Find Bike</button>
+            </div>
+        </div>
+        
+        <!-- Ride Details (Hidden by default) -->
+        <div class="card fixed-bottom rounded-top-4 d-none" id="rideDetailsPanel">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Ride Details</h5>
+                    <span class="badge bg-primary" id="ridePrice">GHS 15.00</span>
+                </div>
+                
+                <div class="d-flex align-items-center mb-3">
+                    <div class="me-3">
+                        <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Driver" id="driverAvatar">
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-0" id="driverName">Kwame Mensah</h6>
+                        <small class="text-muted" id="bikeDetails">Yamaha - ABC 1234</small>
+                    </div>
+                    <div class="text-end">
+                        <span class="badge bg-light text-dark" id="driverRating">4.8 ★</span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Pickup:</span>
+                        <span id="pickupAddress">Circle, Accra</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Destination:</span>
+                        <span id="destinationAddress">Airport, Accra</span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Payment Method</label>
+                    <select class="form-select" id="paymentMethod">
+                        <option value="cash">Cash</option>
+                        <option value="mtn">MTN Mobile Money</option>
+                        <option value="airtel">AirtelTigo Money</option>
+                        <option value="card">Credit/Debit Card</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-success w-100 py-3" id="confirmRideBtn">Confirm Ride</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Map SDK -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVFImbpp5hyc5FvpU2K4neMijA5ZS4F2g&libraries=places"></script>
+    <!-- Custom JS -->
+    <script src="js/passenger.js"></script>
+    <script src="passenger.js"></script>
+    <script src="realtime.js"></script>
+    <script src="payments.js"></script>
+</body>
+</html>
